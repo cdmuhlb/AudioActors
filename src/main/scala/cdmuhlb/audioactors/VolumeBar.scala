@@ -15,11 +15,11 @@ class VolumeBar(analyzer: ActorRef) extends Actor with ActorLogging {
     val updateInterval = FiniteDuration(config.getMilliseconds(
         "audioactors.volume-bar.update-interval"), MILLISECONDS)
     ticker = context.system.scheduler.schedule(
-        updateInterval, updateInterval, analyzer, GetMax)
+        updateInterval, updateInterval, analyzer, GetAnalysis)
   }
 
   def receive = {
-    case HaveMax(max) ⇒
+    case HaveAnalysis(max) ⇒
       val length = (max*consoleWidth).toInt
       val sb = new StringBuilder(consoleWidth + 1)
       for (i ← 0 until length) sb += '|'

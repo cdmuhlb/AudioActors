@@ -31,7 +31,8 @@ object Main extends App {
   val system = ActorSystem("AudioActors", config)
   val capturer = system.actorOf(Props(classOf[Capturer], mixerInfo,
       targetLineInfo), "captuer")
-  val analyzer = system.actorOf(Props(classOf[MaxConsumer], format), "analyzer")
+  val analyzer = system.actorOf(Props(classOf[Consumer], format,
+      MaxAnalyzerProducer), "analyzer")
   val volumeBar = system.actorOf(Props(classOf[VolumeBar], analyzer),
       "volumeBar")
 
