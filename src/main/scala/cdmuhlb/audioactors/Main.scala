@@ -32,7 +32,7 @@ object Main extends App {
   val capturer = system.actorOf(Props(classOf[Capturer], mixerInfo,
       targetLineInfo), "captuer")
   val analyzer = system.actorOf(Props(classOf[Consumer], format,
-      MaxAnalyzerProducer), "analyzer")
+      RmsAnalyzerProducer), "analyzer")
   val volumeBar = system.actorOf(Props(classOf[VolumeBar], analyzer),
       "volumeBar")
 
